@@ -5,8 +5,9 @@ Install python
 Install Flask
 http://flask.pocoo.org/docs/0.11/installation/
 
+Open terminal and change directory to the repo folder(repl-challenge)
 
-To run the application give this command in your terminal: python views.py
+To run give this command in your terminal: python views.py
 
 go to 127.0.0.1:5000 in your browser
 
