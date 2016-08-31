@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+{% block scripts %}
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script> 
+		function run() {
+			$("#instructions").text("");
+			input_names = ['code', 'parameters']
+			input_data = {}
+			for (var i=0; i<input_names.length; i++){
+				input_data[input_names[i]] = $("[name='" + input_names[i] + "']").val()
+			}
+	     	$.ajax(
+		    {
+	          	url: "/run",
+	          	type: 'POST',
+	          	data: {json_str: JSON.stringify(input_data)},
+	          	success: function(response) {
+          			if (response.result) {
+            			$("[name='result']").val(response.result);
+          			} else {
+            			$("[name='result']").val("");
+          			}
+        		},
+	          	statusCode:{
+	            	404: function(response) {
+	            		$("[name='result']").val("Your code had a bug!");
+	          	}}
+		    }
+	      	);
+	 	}
+	 	function deploy() {
+			input_names = ['code']
+			input_data = {}
+			for (var i=0; i<input_names.length; i++){
+				input_data[input_names[i]] = $("[name='" + input_names[i] + "']").val()
+			}
+	     	$.ajax(
+		    {
+	          	url: "/deploy",
+	          	type: 'POST',
+	          	data: {json_str: JSON.stringify(input_data)},
+	          	success: function(response) {
+          			if (response.url) {
+            			$("[name='result']").val(response.url);
+                		var text = "POST json_str={'parameters':'YOUR PARAMETERS'} as application/x-www-form-urlencoded to above URL to get the result. To view the function you deployed do GET to that URL.";
+                		$("#instructions").text(text);
+          			} else {
+            			$("[name='result']").val("");
+          			}
+        		},
+	          	statusCode:{
+	            	404: function(response) {
+	            		$("[name='result']").val("Your code had a bug!");
+	          	}}
+		    }
+	      	);
+	 	}
+
+	</script>
+{% endblock %}
+		<div>
+			<textarea type="textarea" name="code" style="width:1000px;height:400px">def run():
+ pass
+			</textarea>
+		</div>
+			<div style="float:left;clear:both;margin-top:50px;">
+				<div style="float:left;">
+					<label style="width:40px;">Parameters:</label>
+					<input type="text" name="parameters" style="width:500px;height:40px;margin-right:70px;margin-top:-15px"></input>
+				</div>
+				<button id="runbutton" onclick="run();" >run</button>
+				<button id="deploybutton" onclick="deploy();" >deploy</button>
+			</div>
+			<div style="float:left;clear:both;margin-top:35px;">
+				<label style="width:40px;">Result:</label>
+				<input type="text" name="result" style="width:900px;height:40px;"></input>
+			</div>
+			<div style="float:left;clear:both;margin-top:50px;" id="instructions">
+			</div>
+{% endblock %}

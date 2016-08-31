@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Editor page</title>
+		<style type="text/css">
+			textarea {
+    			resize: none;
+    			clear: both;
+			}
+			input[name=parameters] {    
+				float: right;
+			} 
+		</style>
+	</head>
+	<body>
+		<div>
+			<h2>Type and run your code:</h2>
+      		{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>
