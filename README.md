@@ -1,8 +1,21 @@
 # repl-challenge
 
-Install python
-Install Flask
-http://flask.pocoo.org/docs/0.11/installation/
+1. Install python if you don't have.
+
+2. Install pip
+ https://www.digitalocean.com/community/tutorials/common-python-tools-using-virtualenv-installing-with-pip-and-managing-packages
+
+3. Install virtualenv by pip:
+ sudo pip install virtualenv
+
+4. Initiat a vitualenv:
+ virtualenv my_app( in this example it is repl-challenge)
+
+5.Activate the virtualenv:
+ source my_app/bin/activate
+
+6.Run requirements for this project:
+ pip install -r requirements.txt
 
 
 To run the application give this command in your terminal: python views.py

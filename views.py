@@ -3,7 +3,6 @@ from flask import (Flask, request, render_template, redirect, session,
                    make_response, jsonify, Response, json)
 from urlparse import urlparse
 from datetime import datetime, time, timedelta
-import pyotp
 import time
 import random
 
